@@ -1,0 +1,53 @@
+<!--<!DOCTYPE html  "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">-->
+<!--<!DOCTYPE html "thymeleaf syntax https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html">-->
+
+<!--***************************************************-->
+<!--4) Write something in Thymeleaf and lopp throw data-->
+<!--***************************************************-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Coronavirus Tracker application</title>
+<!-- 5) insert bootstrap using CSS from https://getbootstrap.com/docs/4.4/getting-started/introduction/  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+<h1>Coronavirus Tracker application</h1>
+<p>This application lists the current number of cases reported accross the globe</p>
+
+<!--***************************************************-->
+<!--6) Using Jumbotron from https://getbootstrap.com/docs/4.4/components/jumbotron/-->
+<!--***************************************************-->
+<div class="jumbotron">
+    <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+    <p class="lead">Total cases reported as of today</p>
+    <hr class="my-4">
+    <p>
+        <span>New cases reported since prvious day</span>
+        <span th:text="${totalNewCases}"></span>
+    </p>
+</div>
+
+    <!--need loop throw something https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html-->
+    <!--6.1 Iteration basics-->
+<!--  8) add bootstrap table from https://getbootstrap.com/docs/4.4/content/tables/  -->
+    <table class="table">
+        <tr>
+            <th>State</th>
+            <th>Country</th>
+            <th>Total cases reported</th>
+            <th>Changes since last day</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.latestTotalCases}"></td>
+            <td th:text="${locationStat.diffFromPreviousDay}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
